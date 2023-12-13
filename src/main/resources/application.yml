@@ -1,0 +1,17 @@
+
+server:
+  port: 9089
+spring:
+  application:
+    name: school-web
+  datasource:
+    url: jdbc:mysql://localhost:3306/todov2-pagination?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+
+    username: root
+    password: furkan2023
+    driverClassName: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+
