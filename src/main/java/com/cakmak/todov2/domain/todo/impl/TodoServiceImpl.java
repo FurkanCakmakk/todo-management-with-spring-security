@@ -4,6 +4,7 @@ import com.cakmak.todov2.domain.todo.api.TodoDto;
 import com.cakmak.todov2.domain.todo.api.TodoService;
 import com.cakmak.todov2.library.enums.MessageCodes;
 import com.cakmak.todov2.library.exception.CoreException;
+import com.cakmak.todov2.library.exceptiontutorial.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -69,7 +70,7 @@ public class TodoServiceImpl implements TodoService {
     @Transactional
     public TodoDto update(String id, TodoDto dto) {
         Todo todo = repository.findById(id).orElseThrow(
-                () -> new CoreException(MessageCodes.ENTITY_NOT_FOUND, Todo.class.getSimpleName(), id)
+                () -> new ResourceNotFoundException(Todo.class.getSimpleName(), "id", id)
         );
         return TodoMapper.toDto(repository.save(setTodo(todo, dto)));
     }
@@ -78,7 +79,7 @@ public class TodoServiceImpl implements TodoService {
     @Transactional
     public void delete(String id) {
         var todo = repository.findById(id).orElseThrow(
-                () -> new CoreException(MessageCodes.ENTITY_NOT_FOUND, Todo.class.getSimpleName(), id)
+                () -> new ResourceNotFoundException(Todo.class.getSimpleName(), "id", id)
         );
         repository.delete(todo);
     }
@@ -96,8 +97,9 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public TodoDto getById(String id) {
+        System.out.println("Get ById metodunda hatadan gelenler " + MessageCodes.ENTITY_NOT_FOUND.getMessage() + " " + Todo.class.getSimpleName() + " " + id);
         return repository.findById(id).map(TodoMapper::toDto).orElseThrow(
-                () -> new CoreException(MessageCodes.ENTITY_NOT_FOUND, Todo.class.getSimpleName(), id)
+                () -> new ResourceNotFoundException(Todo.class.getSimpleName(), "id", id)
         );
     }
 

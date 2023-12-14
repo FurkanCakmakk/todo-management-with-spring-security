@@ -4,8 +4,8 @@ public enum MessageCodes {
     SUCCESS("200", "Success"),
     FAIL("500", "Fail"),
     BAD_REQUEST("400" , "Bad Request"),
-    ENTITY_NOT_FOUND("404" , "Entity Not Found"),
-    ENTITY_ALREADY_EXISTS("409" ,"Entity Already Exists");
+    ENTITY_NOT_FOUND("404" , "Entity Not Found")    ,
+    ENTITY_ALREADY_EXISTS("409" ,"Entity already exist");
 
     private final String code;
     private final String message;
